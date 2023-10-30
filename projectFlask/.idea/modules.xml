@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../SEMANA VI/Weblll_Testl/.idea/Weblll_Testl.iml" filepath="$PROJECT_DIR$/../../../SEMANA VI/Weblll_Testl/.idea/Weblll_Testl.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/demo_01/.idea/demo_01.iml" filepath="$USER_HOME$/PycharmProjects/demo_01/.idea/demo_01.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/projectFlask.iml" filepath="$PROJECT_DIR$/.idea/projectFlask.iml" />
     </modules>
   </component>

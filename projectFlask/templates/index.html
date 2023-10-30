@@ -25,13 +25,15 @@
                             <td>{{ dato.Texto}}</td>
                             <td>{{ dato.Descripcion}}</td>
                             <td>
-                                <button class="btn btn-outline-success btn-sm" onclick="modificar({{ dato.ID }})">Editar</button>
-                                <button class="btn btn-outline-danger btn-sm" onclick="borrar({{ dato.ID }})">Borrar</button>
+<a class="btn btn-outline-success btn-sm" href="{{ url_for('exec_modificar', ide=dato.ID) }}">Editar</a>
+
+                    <a class="btn btn-outline-danger btn-sm" href="{{ url_for('exec_eliminar', ide=dato.ID) }}">Borrar</a>
                             </td>
                         </tr>
                    {% endfor %}
                 </tbody>
             </table>
             <hr />
-            <a class="btn btn-outline-primary btn-sm" href="{{ url_for('agregar') }}">Agregar dato</a>
+            <a class="btn btn-outline-primary btn-sm" href="{{ url_for('agregars') }}">Agregar dato</a>
         {% endblock %}
+

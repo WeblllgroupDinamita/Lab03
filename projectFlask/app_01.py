@@ -8,18 +8,38 @@ from data.clsDatos import clsDatos
 conex = clsConexion()
 
 
-@app.route('/')
+@app.route('/main')
 def index():
     return render_template('index.html', datos=conex.consultar())
 
+@app.route('/')
+def login():
+    return render_template('login.html', datos=conex.consultar())
+
+@app.route('/signUp', methods=['GET', 'POST'])
+def signUp():
+    if request.method == "POST":
+        datos = clsDatos(0, request.form['txtUsuario'], request.form['txtContra'])
+        # Add the data to the database
+        conex.agregarUsuario(datos)
+        # Log a debug message if the data was successfully added to the database
+        app.logger.debug("Datos almacenados correctamente")
+
+        # Redirect the user to the index page
+        return redirect(url_for("index"))
+    else:
+        return render_template('signUp.html')
 
 @app.route('/agregar', methods=['GET', 'POST'])
-def agregar():
+def agregars():
     if request.method == "POST":
-        if conex.agregar(clsDatos(0, request.form['txtTexto'], request.form['txtDescrip'])):
-            app.logger.debug("Datos almacenados correctamente")
-        else:
-            app.logger.debug("Se presentó un problema con los datos")
+        datos = clsDatos(0, request.form['txtTexto'], request.form['txtDescrip'])
+        # Add the data to the database
+        conex.agregars(datos)
+        # Log a debug message if the data was successfully added to the database
+        app.logger.debug("Datos almacenados correctamente")
+
+        # Redirect the user to the index page
         return redirect(url_for("index"))
     else:
         return render_template('agregar.html')
@@ -27,15 +47,25 @@ def agregar():
 @app.route('/modificar/<int:ide>', methods=['GET'])
 def modificar(ide):
     return render_template('modificar.html', datos=conex.consultar(ide))
-
-
-@app.route('/exec_modificar', methods=['POST'])
+@app.route('/exec_modificar', methods=['POST', 'GET'])
 def exec_modificar():
-    if conex.editar(clsDatos(request.form['txtID'], request.form['txtTexto'], request.form['txtDescrip'])):
-        app.logger.debug("Datos modificados correctamente")
+    if request.method == 'POST':
+        id = request.form['txtID']
+        datos = clsDatos(id, request.form['txtTexto'], request.form['txtDescrip'])
+
+        if conex.modificar(datos):
+            app.logger.debug("Datos modificados correctamente")
+        else:
+            app.logger.debug("Se presentó un problema con los datos")
+
+        # Redirige a la página 'modificar.html' utilizando el nombre de la ruta 'modificar'
+        return redirect(url_for('modificar'))
     else:
-        app.logger.debug("Se presentó un problema con los datos")
-    return redirect(url_for('index'))
+        # Lógica para manejar el método GET, si es necesario
+        return render_template('modificar.html')
+
+
+
 
 @app.route('/exec_eliminar/<int:ide>', methods=['GET'])
 def exec_eliminar(ide):
@@ -44,6 +74,7 @@ def exec_eliminar(ide):
     else:
         app.logger.debug("Se presentó un problema con los datos")
     return redirect(url_for('index'))
+
 # @app.route('/page01')
 # def pag_01():
 #    return render_template('pag_01.html')

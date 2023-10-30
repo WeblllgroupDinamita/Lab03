@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="icon" href="/LWP/Images/LWP_Logo(Hat).png">
+  <link rel="stylesheet" href="/LWP/Css/signUp.css">
+  </link>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script>"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"</script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.8/glider.min.css">
+  <script src="https://kit.fontawesome.com/2c7bfef965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+
+</head>
+
+
+<body style="background-color: #A0A0A0;">
+
+  <div class="container-fluid ">
+    <div class="row ">
+      <div class="col col-3"></div>
+      <!--Card where there is the content to login-->
+      <div class="col col-6 ">
+        <div class="card rounded-4"
+          style=" margin: auto; margin-top: 5%; padding-left: 15%; padding-right: 15%; margin-left: 9%; margin-right: 9%;">
+          <!--Card Body-->
+          <div class="card-body">
+            <form class="BG">
+              <div class="mb-3 ">
+                <!--Img of the companny-->
+
+                <a style="display: block;" href="/LWP/InfoPage/main.html">
+                  <button style="background-color: white; border: none;" class="buttonX" type="button">
+
+                    </svg>
+                  </button>
+                </a>
+                <!--Tittle of the card-->
+    {% block titulo %}
+    {% endblock %}
+                <!--Option Buttons to Log in-->
+              <a style="display: block;">
+    <button style="border-color: #A0A0A0;" type="button" class="rounded-5 form-control btn  mb-3 bi-google">
+       Iniciar sesión con Google
+    </button>
+    </a>
+
+                <a style="display: block;" href="https://es-la.facebook.com/login/device-based/regular/login/">
+                  <button style="border-color: #A0A0A0;" type="button"
+                    class="rounded-5 form-control btn btn-Facebook mb-3 bi bi-facebook "> Iniciar sesión con
+                    Facebook</button>
+                </a>
+                <div class="loader"></div>
+
+                <!--Input holders-->
+                <input id="usuario" placeholder="Correo electronico o teléfono" type="text"
+                  class="mb-3 form-control bg-body-secondary rounded-2" id="exampleInputUser"
+                  aria-describedby="emailHelp" required>
+
+                <input id="contrasena" placeholder="Contraseña" type="password"
+                  class="mb-3 form-control bg-body-secondary rounded-2" id="exampleInputPassword1" required>
+                <!--Button to log in-->
+
+
+                  <a
+                   href="{{ url_for('index') }}"  style="border-color: #A0A0A0; color: white; background-color: #3E4AB8;"
+                    class=" rounded-5 form-control btn  mb-3 "> Siguiente</a>
+                <!--Button to recover password-->
+
+                <a style="display: block;" >
+                  <a style="border-color: #A0A0A0; color: white; background-color: black;" type="button"
+                    href="{{ url_for('signUp') }}"  class=" rounded-5 form-control btn  mb-3 "> Regístrate ahora</a>
+                </a>
+                <!--Button to Register instead of login-->
+
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-3"></div>
+  </div>
+  <!--Load Animation-->
+</body>
+
+</html>

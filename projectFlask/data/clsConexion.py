@@ -2,11 +2,9 @@ import pyodbc
 from data.clsDatos import clsDatos
 
 class clsConexion():
-    # Declara las variables para la conexion
-    _servidor = 'DESKTOP-IFKFPK'   # Recuerde cambiar la dirección y contraseña
+    # Declare the variables for the connection
+    _servidor = 'DESKTOP-KIMF180'
     _basedatos = 'datos'
-    _usuario = 'sa'
-    _contra = 'Ripison89%'
 
     def __init__(self):
         pass
@@ -16,25 +14,41 @@ class clsConexion():
             _conex = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};'
                                    'SERVER=' + self._servidor +
                                    ';DATABASE=' + self._basedatos +
-                                   ';UID=' + self._usuario +
-                                   ';PWD=' + self._contra)
+                                   ';Trusted_Connection=yes')  # Use Windows Authentication
         except Exception as err:
             print(err)
         return _conex
 
-
-    def agregar(self, dato):
+    def agregars(self, dato):
         estado = False
-        AuxSql = "insert into datos(texto, descripcion) values('{0}','{1}')".format(dato.Texto, dato.Descripcion)
+        AuxSql = "INSERT INTO datos (texto, descripcion) VALUES (?, ?)"
         try:
             _conex = self._conectar()
             with _conex.cursor() as cursor:
-                cursor.execute(AuxSql)
+                cursor.execute(AuxSql, (dato.Texto, dato.Descripcion))
+                _conex.commit()  # Commit the transaction
 
-            _conex.close()
             estado = True
         except Exception as err:
-            print(err)
+            print(f"Error while adding data: {err}")
+        finally:
+            _conex.close()
+        return estado
+
+    def agregarUsuario(self, user):
+        estado = False
+        AuxSql = "INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)"
+        try:
+            _conex = self._conectar()
+            with _conex.cursor() as cursor:
+                cursor.execute(AuxSql, (user.Usuarios, user.Contrasena))
+                _conex.commit()  # Commit the transaction
+
+            estado = True
+        except Exception as err:
+            print(f"Error while adding data: {err}")
+        finally:
+            _conex.close()
         return estado
 
 

@@ -1,30 +1,31 @@
-class clsDatos():
-    # Constructor function
+class clsDatos:
     def __init__(self, id=None, texto=None, descripcion=None):
         self._id = id
         self._text = texto
         self._descrip = descripcion
+    @property
+    def ID(self):
+        return self._id
 
-       # Local get/set function set
-        def _getID(self):
-            return self._id
+    @ID.setter
+    def ID(self, id):
+        self._id = id
 
-        def _setID(self, id):
-            self._id = id
+    @property
+    def Texto(self):
+        return self._text
 
-        def _getText(self):
-            return self._text
+    @Texto.setter
+    def Texto(self, texto):
+        self._text = texto
 
-        def _setText(self,texto):
-            self._text = texto
+    @property
+    def Descripcion(self):
+        return self._descrip
 
-        def _getDescrip(self):
-            return self._descrip
+    @Descripcion.setter
+    def Descripcion(self, descripcion):
+        self._descrip = descripcion
 
-        def _setDescrip(self,descripcion):
-            self._descrip = descripcion
 
-        # Encapsulated property
-        ID = property(_getID, _setID)
-        Texto = property(_getText, _setText)
-        Descripcion = property(_getDescrip, _setDescrip)
+
